@@ -44,32 +44,26 @@ public class Yatzy {
     }
 
     public static int pair(DiceRoll roll) {
-        return roll.findNOfAKind(2).stream()
-                .max(naturalOrder())
-                .map(e -> e * 2)
-                .orElse(0);
+        return scoreNOfAKind(roll, 2);
     }
 
     public static int twoPairs(DiceRoll roll) {
         List<Integer> pairs = roll.findNOfAKind(2);
-        return pairs.size() < 2 ? 0 : pairs.stream()
+        if (pairs.size() < 2) {
+            return 0;
+        }
+        return pairs.stream()
                 .map(e -> e * 2)
                 .mapToInt(Integer::intValue)
                 .sum();
     }
 
     public static int threeOfAKind(DiceRoll roll) {
-        return roll.findNOfAKind(3).stream()
-                .max(naturalOrder())
-                .map(e -> e * 3)
-                .orElse(0);
+        return scoreNOfAKind(roll, 3);
     }
 
     public static int fourOfAKind(DiceRoll roll) {
-        return roll.findNOfAKind(4).stream()
-                .max(naturalOrder())
-                .map(e -> e * 4)
-                .orElse(0);
+        return scoreNOfAKind(roll, 4);
     }
 
     public static int smallStraight(DiceRoll roll) {
@@ -87,6 +81,13 @@ public class Yatzy {
             return 0;
         }
         return roll.sum();
+    }
+
+    private static int scoreNOfAKind(DiceRoll roll, int number) {
+        return roll.findNOfAKind(number).stream()
+                .max(naturalOrder())
+                .map(e -> e * number)
+                .orElse(0);
     }
 }
 
