@@ -1,4 +1,4 @@
-package io.abderraoufsalah;
+package io.abderraoufsalah.models;
 
 import java.util.List;
 import java.util.Map;
@@ -7,7 +7,6 @@ import static java.util.Comparator.naturalOrder;
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.summingInt;
-import static java.util.stream.Collectors.toList;
 
 public class DiceRoll {
 
@@ -25,7 +24,7 @@ public class DiceRoll {
     }
 
     public List<Integer> sort() {
-        return roll.stream().sorted(naturalOrder()).collect(toList());
+        return roll.stream().sorted(naturalOrder()).toList();
     }
 
     public Map<Integer, Integer> getAllFrequencies() {
@@ -40,6 +39,6 @@ public class DiceRoll {
         return getAllFrequencies().entrySet().stream()
                 .filter(e -> e.getValue() >= number)
                 .map(Map.Entry::getKey)
-                .collect(toList());
+                .toList();
     }
 }

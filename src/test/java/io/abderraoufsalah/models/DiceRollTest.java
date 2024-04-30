@@ -1,4 +1,4 @@
-package io.abderraoufsalah;
+package io.abderraoufsalah.models;
 
 import java.util.List;
 import java.util.stream.Stream;
